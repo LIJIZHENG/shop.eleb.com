@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::resource('goodsaccount','GoodsaccountController');
+Route::get('goodsaccount.login','GoodsaccountController@login')->name('login');
+Route::post('goodsaccount.check','GoodsaccountController@check')->name('check');
+Route::get('goodsaccount.logut', 'GoodsaccountController@logut')->name('logut');
+Route::get('goodsaccount.revise', 'GoodsaccountController@revise')->name('revise');
+Route::post('goodsaccount.revise', 'GoodsaccountController@revise')->name('revise');
