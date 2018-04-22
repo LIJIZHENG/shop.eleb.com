@@ -21,3 +21,4 @@ Route::get('goodsaccount.logut', 'GoodsaccountController@logut')->name('logut');
 Route::get('goodsaccount.revise', 'GoodsaccountController@revise')->name('revise');
 Route::post('goodsaccount.revise', 'GoodsaccountController@revise')->name('revise');
 Route::resource('menuclass','MenuClassController');
+Route::resource('menu','MenuController');

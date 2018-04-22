@@ -35,18 +35,18 @@
 @section('js')
     <script>
     $(".btn-primary").click(function () {
-    var tr=$(this).closest('tr');
-    if(confirm('是否删除数据!')){
-    var id=tr.data('id');
-    $.ajax({
-    type: "DELETE",
-    url: "menuclass/"+id,
-    data: "_token={{csrf_token()}}",
-    success: function(msg){
-    tr.remove()
-    }
-    })
-    }
+        var tr=$(this).closest('tr');
+       if(confirm('是否删除数据!')){
+           var id=tr.data('id');
+            $.ajax({
+            type: "DELETE",
+            url: "menuclass/"+id,
+            data: "_token={{csrf_token()}}",
+            success: function(msg){
+            tr.remove()
+            }
+       })
+     }
     });
     </script>
 @stop
