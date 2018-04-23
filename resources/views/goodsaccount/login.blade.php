@@ -1,6 +1,7 @@
 @extends('layouts.default')
 @section('content')
     <div class="container">
+        @include('layouts._herder')
         <form action="{{route('check')}}" method="post">
             <div class="form-group">
                 <label for="exampleInputEmail1">商家名称</label>
