@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Activity;
 use App\Goodsaccount;
 use App\Goodsclass;
 use App\Goodsnews;
@@ -31,7 +32,7 @@ class GoodsaccountController extends Controller
             'name'=>'required|min:2',
             'password'=>'required',
             'email'=>'required|email|unique:goodsaccounts',
-            'logo'=>'required|image',
+            'logo'=>'required',
             'brand'=>'required',
             'on_time'=>'required',
             'fengniao'=>'required',
@@ -49,7 +50,6 @@ class GoodsaccountController extends Controller
             'email.unique'=>'邮箱必需唯一!',
             'email.email'=>'邮箱格式不对!',
             'logo.required'=>'图片不能为空!',
-            'logo.image'=>'图片有错!',
             'brand.required'=>'品牌不能为空!',
             'on_time.required'=>'准时送达不能为空!',
             'fengniao.required'=>'是否蜂鸟配送不能为空!',
@@ -61,18 +61,9 @@ class GoodsaccountController extends Controller
             'estimate_time.required'=>'预计时间不能为空!',
         ]);
         DB::transaction(function ()use($request) {
-            $fileName=$request->file('logo')->store('public/logo');
-//            var_dump(url(Storage::url($fileName)));die;
-            $client = App::make('aliyun-oss');
-            try{
-                $client->uploadFile(getenv('OSS_BUCKET'), $fileName, storage_path('app/'.$fileName));
-            } catch(OssException $e) {
-                printf($e->getMessage() . "\n");
-                return;
-            }
             $add=Goodsnews::create([
                 'shop_name'=>$request->name,
-                'shop_img'=>'https://lijizheng-laravel.oss-cn-beijing.aliyuncs.com/'.$fileName,
+                'shop_img'=>$request->logo,
                 'brand'=>$request->brand,
                 'on_time'=>$request->on_time,
                 'fengniao'=>$request->fengniao,
@@ -90,7 +81,7 @@ class GoodsaccountController extends Controller
                 'name'=>$request->name,
                 'password'=>bcrypt($request->password),
                 'email'=>$request->email,
-                'logo'=>url(Storage::url($fileName)),
+                'logo'=>$request->logo,
                 'goods_class_id'=>$request->goods_class_id,
                 'goodsnews_id'=>$add->id
             ]);

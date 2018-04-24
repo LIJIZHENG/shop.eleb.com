@@ -37,7 +37,7 @@ class MenuController extends Controller
           'menu_price'=>'required',
           'description'=>'required|min:5',
           'tips'=>'required|min:5',
-          'menu_img'=>'required|image',
+          'menu_img'=>'required',
       ],[
           'menu_name.required'=>'菜品名称不能为空!',
           'menu_name.min'=>'菜品名称长度必须大于2位!',
@@ -47,17 +47,8 @@ class MenuController extends Controller
           'tips.required'=>'菜品提示不能为空!',
           'tips.min'=>'菜品提示不能小于五位!',
           'menu_img.required'=>'图片不能为空!',
-          'menu_img.image'=>'图片格式不对!'
       ]);
-      $fileName=$request->file('menu_img')->store('public/logo');
-        $client = App::make('aliyun-oss');
-        try{
-            $client->uploadFile(getenv('OSS_BUCKET'), $fileName, storage_path('app/'.$fileName));
-        } catch(OssException $e) {
-            printf($e->getMessage() . "\n");
-            return;
-        }
-      Menu::create(['menu_name'=>$request->menu_name,'menu_price'=>$request->menu_price,'description'=>$request->description,'tips'=>$request->tips,'menu_img'=>'https://lijizheng-laravel.oss-cn-beijing.aliyuncs.com/'.$fileName,'menuclass_id'=>$request->menuclass_id,'goodsnews_id'=>Auth::user()->goodsnews_id]);
+      Menu::create(['menu_name'=>$request->menu_name,'menu_price'=>$request->menu_price,'description'=>$request->description,'tips'=>$request->tips,'menu_img'=>$request->menu_img,'menuclass_id'=>$request->menuclass_id,'goodsnews_id'=>Auth::user()->goodsnews_id]);
       session()->flash('success','添加成功!');
       return redirect()->route('menu.index');
     }
@@ -81,15 +72,7 @@ class MenuController extends Controller
             'tips.min'=>'菜品提示不能小于五位!'
         ]);
         if ($request->menu_img){
-            $fileName=$request->file('menu_img')->store('public/logo');
-            $client = App::make('aliyun-oss');
-            try{
-                $client->uploadFile(getenv('OSS_BUCKET'), $fileName, storage_path('app/'.$fileName));
-            } catch(OssException $e) {
-                printf($e->getMessage() . "\n");
-                return;
-            }
-            $menu->update(['menu_name'=>$request->menu_name,'menu_price'=>$request->menu_price,'description'=>$request->description,'tips'=>$request->tips,'menu_img'=>'https://lijizheng-laravel.oss-cn-beijing.aliyuncs.com/'.$fileName,'menuclass_id'=>$request->menuclass_id,'goodsnews_id'=>Auth::user()->goodsnews_id]);
+            $menu->update(['menu_name'=>$request->menu_name,'menu_price'=>$request->menu_price,'description'=>$request->description,'tips'=>$request->tips,'menu_img'=>$request->menu_img,'menuclass_id'=>$request->menuclass_id,'goodsnews_id'=>Auth::user()->goodsnews_id]);
             session()->flash('success','修改成功!');
             return redirect()->route('menu.index');
         }else{

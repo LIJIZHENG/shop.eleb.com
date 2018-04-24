@@ -2,7 +2,8 @@
 @section('content')
     <div class="container">
         @include('layouts._herder')
-            <form action="{{route('goodsaccount.store')}}" method="post" enctype="multipart/form-data">
+        <link rel="stylesheet" type="text/css" href="/webuploader/webuploader.css">
+            <form action="{{route('goodsaccount.store')}}" method="post">
                 <div class="form-group">
                     <label for="exampleInputEmail1">商家名称</label>
                     <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="商家名称" value="{{old('name')}}">
@@ -25,8 +26,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputFile">商家图片</label>
-                    <input type="file" id="exampleInputFile" name="logo">
+                    <label>商家图片</label>
+                    <input type="hidden" name="logo" class="form-control" id="logo">
+                </div>
+                <div class="form-group">
+                    <div id="uploader-demo">
+                        <div id="fileList" class="uploader-list"></div>
+                        <div id="filePicker">选择图片</div>
+                    </div>
+                    <img src="" alt="" id="img">
                 </div>
 
                 <div class="form-group">
@@ -73,4 +81,35 @@
                 <button type="submit" class="btn btn-danger">添加</button>
             </form>
         </div>
+@stop
+@section('js')
+    <script type="text/javascript" src="/webuploader/webuploader.js"></script>
+    <script>
+        var uploader = WebUploader.create({
+
+            // 选完文件后，是否自动上传。
+            auto: true,
+
+            // swf文件路径
+            swf:'/webuploader/Uploader.swf',
+
+            // 文件接收服务端。
+            server: '/upload',
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#filePicker',
+            formData:{'_token':"{{csrf_token()}}"},
+            // 只允许选择图片文件。
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+        uploader.on( 'uploadSuccess', function( file,response) {
+            $("#img").attr('src',response.url);
+            $("#logo").val(response.url);
+        });
+    </script>
 @stop

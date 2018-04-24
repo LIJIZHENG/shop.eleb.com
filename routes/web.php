@@ -22,3 +22,5 @@ Route::get('goodsaccount.revise', 'GoodsaccountController@revise')->name('revise
 Route::post('goodsaccount.revise', 'GoodsaccountController@revise')->name('revise');
 Route::resource('menuclass','MenuClassController');
 Route::resource('menu','MenuController');
+Route::post('/upload','UploadController@upload');
+Route::resource('activity','ActivityController');
