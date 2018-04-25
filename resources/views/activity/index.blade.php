@@ -2,20 +2,24 @@
 @section('content')
     <div class="container">
     @include('layouts._herder')
-        <table class="table table-responsive">
+        <table class="table table-bordered">
             <tr>
-                <td colspan="3" style="text-align: center">
-                    <h1>最新活动</h1>
-                </td>
+                <th>ID</th>
+                <th>活动名称</th>
+                <th>活动开始时间</th>
+                <th>活动结束时间</th>
+                <th>操作</th>
             </tr>
             @foreach($rows as $row)
-                @if(strtotime($row->end)>=strtotime(date('Y-m-d',time())))
                 <tr>
-                    <td><h1>{{$row->name}}</h1></td>
-                    <td>{!! $row->contents !!}</td>
-                    <td><h3>活动有效时间:{{$row->start}}<---->{{$row->end}}</h3></td>
+                    <td>{{$row['id']}}</td>
+                    <td>{{$row['name']}}</td>
+                    <td>{{$row['start']}}</td>
+                    <td>{{$row['end']}}</td>
+                    <td>
+                        <a href="{{route('activity.show',['activity'=>$row])}}" class="btn btn-danger">查看活动详情</a>
+                    </td>
                 </tr>
-                @endif
             @endforeach
         </table>
     </div>

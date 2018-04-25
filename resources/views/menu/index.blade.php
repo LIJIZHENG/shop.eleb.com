@@ -20,11 +20,11 @@
             <th>操作</th>
         </tr>
         @foreach($rows as $row)
-        <tr data-id="{{$row['id']}}">
-            <td>{{$row['id']}}</td>
-            <td>{{$row['menu_name']}}</td>
+        <tr data-id="{{$row['goods_id']}}">
+            <td>{{$row['goods_id']}}</td>
+            <td>{{$row['goods_name']}}</td>
             <td>{{$row['rating']}}</td>
-            <td>{{$row['menu_price']}}</td>
+            <td>{{$row['goods_price']}}</td>
             <td>{{$row['description']}}</td>
             <td>{{$row['month_sales']}}</td>
             <td>{{$row['rating_count']}}</td>

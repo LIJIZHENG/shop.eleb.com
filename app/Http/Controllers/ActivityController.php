@@ -11,8 +11,11 @@ class ActivityController extends Controller
     //
 
     public function index(){
-//        $obj=Activity::all();
-        $rows=DB::table('activities')->select()->get();
+        $rows=Activity::all();
         return view('activity.index',compact('rows'));
+    }
+    public function show(Activity $activity){
+        $row=Activity::find($activity->id);
+        return view('activity.show',compact('row'));
     }
 }

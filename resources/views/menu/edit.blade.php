@@ -6,7 +6,7 @@
         <form action="{{route('menu.update',['menu'=>$menu])}}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="exampleInputEmail1">菜品名称</label>
-                <input type="text" name="menu_name" class="form-control" id="exampleInputEmail1" placeholder="菜品名称" value="{{$menu->menu_name}}">
+                <input type="text" name="goods_name" class="form-control" id="exampleInputEmail1" placeholder="菜品名称" value="{{$menu->goods_name}}">
             </div>
             {{--<div class="form-group">--}}
                 {{--<label for="exampleInputPassword1">评分</label>--}}
@@ -14,7 +14,7 @@
             {{--</div>--}}
             <div class="form-group">
                 <label for="exampleInputPassword1">菜品价格</label>
-                <input type="number" name="menu_price" class="form-control" id="exampleInputPassword1" placeholder="菜品价格" value="{{$menu->menu_price}}">
+                <input type="number" name="goods_price" class="form-control" id="exampleInputPassword1" placeholder="菜品价格" value="{{$menu->goods_price}}">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">菜品描述</label>
@@ -38,14 +38,14 @@
             {{--</div>--}}
             <div class="form-group">
                 <label for="exampleInputPassword1">图片</label>
-                <input type="hidden" name="menu_img" class="form-control" id="menu_img">
+                <input type="hidden" name="goods_img" class="form-control" id="menu_img">
             </div>
             <div class="form-group">
                 <div id="uploader-demo">
                     <div id="fileList" class="uploader-list"></div>
                     <div id="filePicker">选择图片</div>
                 </div>
-                <img src="{{$menu->menu_img}}" alt="" id="img">
+                <img src="{{$menu->goods_img}}" alt="" id="img">
             </div>
             <div class="form-group">
                 <label for="exampleInputFile">菜品分类</label>
