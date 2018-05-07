@@ -19,8 +19,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">功能<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="">#</a></li>
-                        <li><a href="#">Another action</a></li>
+                        <li><a href="{{route('addoreder.index')}}">订单管理</a></li>
+                        <li><a href="#">订单量统计</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Separated link</a></li>

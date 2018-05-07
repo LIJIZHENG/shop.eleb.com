@@ -8,6 +8,6 @@ class MenuClass extends Model
 {
     //
     protected $fillable = [
-        'name', 'description', 'is_selected','type_accumulation'
+        'name', 'description', 'is_selected','type_accumulation','goodsnews_id'
     ];
 }

@@ -4,7 +4,6 @@
     @include('layouts._herder')
     <table class="table table-bordered">
         <tr>
-            <th>ID</th>
             <th>菜品名称</th>
             <th>菜品评分</th>
             <th>菜品价钱</th>
@@ -20,8 +19,7 @@
             <th>操作</th>
         </tr>
         @foreach($rows as $row)
-        <tr data-id="{{$row['goods_id']}}">
-            <td>{{$row['goods_id']}}</td>
+        <tr data-id="{{$row['id']}}">
             <td>{{$row['goods_name']}}</td>
             <td>{{$row['rating']}}</td>
             <td>{{$row['goods_price']}}</td>
@@ -54,7 +52,6 @@
             var tr=$(this).closest('tr');
             if(confirm('是否删除数据!')){
                 var id=tr.data('id');
-//                console.log(id);
                 $.ajax({
                     type: "DELETE",
                     url: "menu/"+id,

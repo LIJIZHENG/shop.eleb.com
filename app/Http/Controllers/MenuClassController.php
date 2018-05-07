@@ -19,10 +19,7 @@ class MenuClassController extends Controller
     }
     public function index(){
               if(Auth::user()){
-                  $row=DB::table('menus')
-                      ->where('goodsnews_id', '=',Auth::user()->goodsnews_id)
-                      ->first();
-                  $rows=MenuClass::all()->where('id','=',$row->menuclass_id);
+                  $rows=MenuClass::all()->where('goodsnews_id','=',Auth::user()->goodsnews_id);
                   return view('menuclass.index',compact('rows'));
               }else{
                    session()->flash('success','请登录!');
@@ -43,7 +40,7 @@ class MenuClassController extends Controller
             'description.required'=>'菜品分类描述不能为空!',
             'description.min'=>'菜品分类长度不能小于5'
         ]);
-        MenuClass::create(['name'=>$request->name,'description'=>$request->description,'type_accumulation'=>$request->type_accumulation,'is_selected'=>$request->is_selected]);
+        MenuClass::create(['name'=>$request->name,'description'=>$request->description,'type_accumulation'=>$request->type_accumulation,'is_selected'=>$request->is_selected,'goodsnews_id'=>Auth::user()->goodsnews_id]);
         session()->flash('success','添加成功!');
         return redirect()->route('menuclass.index');
     }

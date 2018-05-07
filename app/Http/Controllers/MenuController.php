@@ -54,7 +54,6 @@ class MenuController extends Controller
       return redirect()->route('menu.index');
     }
     public function edit(Menu $menu){
-        dd($menu);
         $rows=MenuClass::all();
         return view('menu.edit',compact('menu','rows'));
     }
